@@ -1,18 +1,27 @@
 return {
   "hrsh7th/nvim-cmp",
+  dependencies = {
+    "onsails/lspkind.nvim",
+  },
   opts = function(_, opts)
     local cmp = require("cmp")
-    local ok_luasnip, luasnip = pcall(require, "luasnip")
 
-    -- Optional: disable ghost text if you don't like it
+    -- Disable ghost text
     opts.experimental = opts.experimental or {}
     opts.experimental.ghost_text = false
 
-    opts.snippet = {
-      expand = function(args)
-        if ok_luasnip then
-          luasnip.lsp_expand(args.body)
-        end
+    opts.formatting = {
+      format = function(entry, vim_item)
+        vim_item.mode = "icon"
+        vim_item.menu = ({
+          buffer = "<BUFF>",
+          nvim_lsp = "<LSP>",
+          snippets = "<SNIP>",
+          nvim_lua = "<LUA>",
+          path = "<PATH>",
+        })[entry.source.name] or ("<" .. entry.source.name .. ">")
+
+        return vim_item
       end,
     }
 
@@ -22,26 +31,23 @@ return {
         fallback()
       end, { "i" }),
 
-      -- ✅ Enter: insert plain text (no snippet placeholders)
+      --Modify how snippets are inserted
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           local entry = cmp.get_selected_entry()
-          if entry then
-            local insertText = entry:get_insert_text()
-            if insertText:match("%$%{") then
-              insertText = insertText:gsub("%$%b{}", "")
-            end
-            vim.api.nvim_feedkeys(insertText, "i", true)
-            cmp.close()
-          else
+          if not entry then
             fallback()
+            return
           end
+
+          -- fallback: standard cmp confirm if no textEdit provided
+          cmp.confirm({ select = true })
         else
           fallback()
         end
       end, { "i", "s" }),
 
-      -- ✅ Esc: close popup first, second Esc exits insert mode
+      -- Close popup first, second Esc exits insert mode
       ["<Esc>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.close()
