@@ -27,9 +27,9 @@ return {
 
     opts.mapping = vim.tbl_extend("force", opts.mapping, {
       -- Maintain enter key's normal behaviour
-      ["<CR>"] = cmp.mapping(function(fallback)
-        fallback()
-      end, { "i" }),
+      -- ["<CR>"] = cmp.mapping(function(fallback)
+      --   fallback()
+      -- end, { "i" }),
 
       --Modify how snippets are inserted
       ["<Tab>"] = cmp.mapping(function(fallback)
@@ -47,8 +47,8 @@ return {
         end
       end, { "i", "s" }),
 
-      -- Close popup first, second Esc exits insert mode
-      ["<Esc>"] = cmp.mapping(function(fallback)
+      -- Close popup with ctrl+q
+      ["<C-q>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.close()
         else

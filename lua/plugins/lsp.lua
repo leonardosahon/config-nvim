@@ -8,6 +8,11 @@ return {
           gopls = {
             usePlaceholders = false,
             completeUnimported = true,
+            -- Enable hints for composite literals
+            hints = {
+              compositeLiteralFields = true, -- Shows field names in struct literals
+              compositeLiteralTypes = true, -- Shows type info for struct literals
+            },
           },
         },
       },

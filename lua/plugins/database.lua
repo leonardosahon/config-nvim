@@ -22,6 +22,7 @@ return {
     -- vim.g.db_ui_force_echo_notifications = 1
     vim.g.db_ui_win_position = "left"
     vim.g.db_ui_winwidth = 30
+    vim.g.db_ui_execute_on_save = false
 
     vim.api.nvim_create_autocmd("FileType", {
       pattern = { "sql", "mysql", "plsql", "pgsql" },
@@ -37,10 +38,9 @@ return {
         })
         -- Remove the default :w execution mapping
         -- vim.api.nvim_buf_del_keymap(0, "n", "<leader>W") -- Just in case
-        vim.api.nvim_buf_del_keymap(0, "n", "<Plug>(DBUI_ExecuteQuery)")
 
         -- Remap :r to execute the query
-        vim.api.nvim_buf_set_keymap(0, "n", ":r", ":DBUIExecuteQuery<CR>", { noremap = true, silent = true })
+        vim.api.nvim_buf_set_keymap(0, "n", ":r", "<Plug>(DBUI_ExecuteQuery)", { noremap = true, silent = true })
       end,
     })
   end,
