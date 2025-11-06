@@ -9,3 +9,4 @@ vim.g.loaded_sql_completion = 1
 vim.g.omni_sql_no_default_maps = 1
 
 vim.opt.undofile = false
+vim.g.root_spec = { "cwd" }
