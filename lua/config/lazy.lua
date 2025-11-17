@@ -62,3 +62,5 @@ require("catppuccin").setup({
 })
 
 vim.cmd("colorscheme catppuccin")
+
+vim.filetype.add({ extension = { templ = "templ" } })
