@@ -93,7 +93,14 @@ return {
           "branch",
           { "diagnostics", separator = { right = "" } },
         },
-        lualine_c = { "%=", "filename" },
+        lualine_c = {
+          "%=",
+          {
+            "filename",
+            path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path, 3 = relative path with truncation, 5 = path segments
+            file_status = true, -- displays file status (readonly status, modified status)
+          },
+        },
         lualine_x = { "selectioncount" },
         lualine_y = { "filetype", "progress" },
         lualine_z = { { "location", separator = { right = "" }, left_padding = 2 } },
