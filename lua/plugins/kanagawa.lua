@@ -3,32 +3,66 @@ return {
   lazy = false,
   priority = 1000,
   config = function()
-    -- Default options:
+    -- High-contrast + polished Kanagawa DRAGON configuration
     require("kanagawa").setup({
-      compile = false, -- enable compiling the colorscheme
-      undercurl = true, -- enable undercurls
-      commentStyle = { italic = true },
-      functionStyle = {},
-      keywordStyle = { italic = true },
+      compile = false,
+      undercurl = true,
+      commentStyle = { italic = false, bold = true },
+      keywordStyle = { italic = false, bold = true },
       statementStyle = { bold = true },
-      typeStyle = {},
-      transparent = false, -- do not set background color
-      dimInactive = false, -- dim inactive window `:h hl-NormalNC`
-      terminalColors = true, -- define vim.g.terminal_color_{0,17}
-      colors = { -- add/modify theme and palette colors
-        palette = {},
-        theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+      typeStyle = { bold = true },
+
+      transparent = false,
+      dimInactive = true,
+      terminalColors = true,
+
+      colors = {
+        theme = {
+          dragon = {
+            ui = {
+              bg_gutter = "none",
+              float = {
+                bg = "#1F1F28",
+                border = "#A6A69C",
+              },
+            },
+          },
+        },
       },
-      overrides = function(colors) -- add/modify highlights
-        return {}
+
+      overrides = function(colors)
+        local theme = colors.theme
+        return {
+          -- Make comments readable
+          Comment = { fg = theme.syn.comment, bold = true },
+
+          -- Better diagnostic readability
+          DiagnosticVirtualTextError = { bg = "none", fg = theme.diag.error },
+          DiagnosticVirtualTextWarn = { bg = "none", fg = theme.diag.warn },
+          DiagnosticVirtualTextInfo = { bg = "none", fg = theme.diag.info },
+          DiagnosticVirtualTextHint = { bg = "none", fg = theme.diag.hint },
+
+          FloatBorder = { fg = theme.ui.float.fg_border, bg = theme.ui.float.bg },
+
+          NormalFloat = { bg = theme.ui.float.bg },
+
+          -- Improve Telescope contrast
+          TelescopeNormal = { bg = "#1A1A22" },
+          TelescopeBorder = { bg = "#1A1A22", fg = "#1A1A22" },
+          TelescopeSelection = { bg = "#2A2A36" },
+
+          -- Cursor line highlight
+          CursorLine = { bg = "#2A2A37" },
+        }
       end,
-      theme = "wave", -- Load "wave" theme
-      background = { -- map the value of 'background' option to a theme
-        dark = "wave", -- try "dragon" !
+
+      background = {
+        dark = "dragon",
         light = "lotus",
       },
     })
 
+    -- Bufferline
     require("bufferline").setup({
       options = {
         separator_style = "slant",
@@ -39,12 +73,14 @@ return {
           reveal = { "close" },
         },
         highlights = {
-          bold = true,
-          italic = false,
+          fill = { bg = "#1F1F28" },
+          background = { bg = "#1F1F28" },
+          buffer_selected = { bold = true, italic = false },
         },
       },
     })
 
+    -- Lualine
     require("lualine").setup({
       options = {
         theme = "kanagawa",
@@ -57,29 +93,13 @@ return {
           "branch",
           { "diagnostics", separator = { right = "" } },
         },
-        lualine_c = {
-          "%=",
-          "filename",
-        },
+        lualine_c = { "%=", "filename" },
         lualine_x = { "selectioncount" },
         lualine_y = { "filetype", "progress" },
-        lualine_z = {
-          { "location", separator = { right = "" }, left_padding = 2 },
-        },
+        lualine_z = { { "location", separator = { right = "" }, left_padding = 2 } },
       },
-      inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {},
-      },
-      tabline = {},
-      extensions = {},
     })
 
-    -- setup must be called before loading
-    vim.cmd("colorscheme kanagawa")
+    vim.cmd("colorscheme kanagawa-dragon")
   end,
 }
