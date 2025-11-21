@@ -1,0 +1,69 @@
+return {
+  {
+    "shaunsingh/nord.nvim",
+
+    dependencies = { "nvim-lualine/lualine.nvim" },
+    lazy = false,
+    priority = 1000,
+
+    config = function()
+      vim.g.nord_contrast = true
+      vim.g.nord_borders = true
+      vim.g.nord_disable_background = false
+      vim.g.nord_enable_sidebar_background = false
+      vim.g.nord_cursorline_transparent = true
+      vim.g.nord_italic = false
+      vim.g.nord_uniform_diff_background = true
+      vim.g.nord_bold = true
+
+      local highlights = require("nord").bufferline.highlights({
+        italic = true,
+        bold = true,
+        fill = "#181c24",
+      })
+
+      require("bufferline").setup({
+        options = {
+          separator_style = "slant",
+        },
+        highlights = highlights,
+      })
+
+      require("lualine").setup({
+        options = {
+          theme = "nord",
+          component_separators = "",
+          section_separators = { left = "", right = "" },
+        },
+        sections = {
+          lualine_a = { { "mode", separator = { left = "" }, right_padding = 2 } },
+          lualine_b = {
+            "branch",
+            { "diagnostics", separator = { right = "" } },
+          },
+          lualine_c = {
+            "%=",
+            "filename",
+          },
+          lualine_x = { "selectioncount" },
+          lualine_y = { "filetype", "progress" },
+          lualine_z = {
+            { "location", separator = { right = "" }, left_padding = 2 },
+          },
+        },
+        inactive_sections = {
+          lualine_a = { "filename" },
+          lualine_b = {},
+          lualine_c = {},
+          lualine_x = {},
+          lualine_y = {},
+          lualine_z = { "location" },
+        },
+        tabline = {},
+        extensions = {},
+      })
+
+      vim.cmd.colorscheme("nord")
+    end,
+  },
+}
