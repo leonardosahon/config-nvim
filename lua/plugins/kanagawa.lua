@@ -2,7 +2,12 @@ return {
   "rebelot/kanagawa.nvim",
   lazy = false,
   priority = 1000,
+  dependencies = {
+    "folke/snacks.nvim",
+  },
   config = function()
+    -- local snacks = require("snacks")
+
     -- High-contrast + polished Kanagawa DRAGON configuration
     require("kanagawa").setup({
       compile = false,
@@ -14,7 +19,7 @@ return {
 
       transparent = false,
       dimInactive = true,
-      terminalColors = true,
+      terminalColors = false,
 
       colors = {
         theme = {
