@@ -18,7 +18,7 @@ return {
                     },
                     apply = true,
                   })
-                  vim.wait(100)
+                  vim.wait(50)
                 end
               end,
             })
@@ -38,7 +38,7 @@ return {
                     },
                     apply = true,
                   })
-                  vim.wait(100)
+                  vim.wait(50)
                 end
               end,
             })
