@@ -16,7 +16,7 @@ return {
     -- SOURCES (your original list but safely applied)
     ---------------------------------------------------------------------------
     opts.sources = {
-      { name = "supermaven" },
+      -- { name = "supermaven" },
       { name = "nvim_lsp" },
       { name = "luasnip" },
       { name = "buffer" },
