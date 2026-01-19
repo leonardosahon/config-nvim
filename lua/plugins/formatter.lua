@@ -21,6 +21,7 @@ return {
       formatters_by_ft = {
         sql = { "sqlfluff" },
         pgsql = { "sqlfluff" },
+        php = { "prettier" },
       },
 
       formatters = {
@@ -31,6 +32,17 @@ return {
           cwd = function()
             return vim.fn.getcwd()
           end,
+        },
+        prettier = {
+          command = "prettier",
+          args = {
+            "--plugin="
+              .. os.getenv("NVM_DIR")
+              .. "/versions/node/v20.19.5/lib/node_modules/@prettier/plugin-php/standalone.js",
+            "--stdin-filepath",
+            "$FILENAME",
+          },
+          stdin = true,
         },
       },
     },
