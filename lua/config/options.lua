@@ -4,7 +4,7 @@
 
 -- MY Options
 
--- Disable Neovim’s legacy SQL completion that causes the E117 errors
+-- Disable Neovim's legacy SQL completion that causes the E117 errors
 vim.g.loaded_sql_completion = 1
 vim.g.omni_sql_no_default_maps = 1
 

@@ -14,10 +14,10 @@ return {
   },
 
   -- Optional: Treesitter highlighting for templ
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, { "templ", "html", "go" })
-    end,
-  },
+  -- {
+  --   "nvim-treesitter/nvim-treesitter",
+  --   opts = function(_, opts)
+  --     vim.list_extend(opts.ensure_installed, { "templ", "html", "go" })
+  --   end,
+  -- },
 }

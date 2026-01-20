@@ -21,9 +21,9 @@ return {
       formatters_by_ft = {
         sql = { "sqlfluff" },
         pgsql = { "sqlfluff" },
-        php = { "prettier" },
+        php = { "php-cs-fixer" },
+        -- html = { "prettier" },
       },
-
       formatters = {
         sqlfluff = {
           command = "sqlfluff",
@@ -33,16 +33,15 @@ return {
             return vim.fn.getcwd()
           end,
         },
-        prettier = {
-          command = "prettier",
+
+        ["php-cs-fixer"] = {
+          command = "php-cs-fixer",
           args = {
-            "--plugin="
-              .. os.getenv("NVM_DIR")
-              .. "/versions/node/v20.19.5/lib/node_modules/@prettier/plugin-php/standalone.js",
-            "--stdin-filepath",
+            "fix",
+            "--rules=@PSR12", -- Formatting preset. Other presets are available, see the php-cs-fixer docs.
             "$FILENAME",
           },
-          stdin = true,
+          stdin = false,
         },
       },
     },
