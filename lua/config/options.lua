@@ -9,7 +9,12 @@ vim.g.loaded_sql_completion = 1
 vim.g.omni_sql_no_default_maps = 1
 
 vim.opt.undofile = false
--- vim.g.root_spec = { "cwd" }
+
+-- Disable file watchers to prevent "too many open files" errors
+vim.g.lazyvim_file_watcher = false
+
+-- Limit root detection to prevent scanning large directories
+vim.g.root_spec = { "cwd" }
 
 vim.filetype.add({
   extension = {
