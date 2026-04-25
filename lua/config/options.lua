@@ -2,20 +2,6 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
--- MY Options
-
--- Disable Neovim's legacy SQL completion that causes the E117 errors
-vim.g.loaded_sql_completion = 1
-vim.g.omni_sql_no_default_maps = 1
-
-vim.opt.undofile = false
-
--- Disable file watchers to prevent "too many open files" errors
-vim.g.lazyvim_file_watcher = false
-
--- Limit root detection to prevent scanning large directories
-vim.g.root_spec = { "cwd" }
-
 vim.filetype.add({
   extension = {
     inc = "php",

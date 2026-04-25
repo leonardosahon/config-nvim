@@ -47,21 +47,7 @@ require("lazy").setup({
         "tohtml",
         "tutor",
         "zipPlugin",
-        "mini.icons",
       },
     },
   },
 })
-
---# My Custom Configs #--
-
--- require("catppuccin").setup({
---   flavour = "mocha",
---   auto_integrations = true,
---   no_italic = true,
---   no_bold = true,
--- })
---
--- vim.cmd("colorscheme catppuccin")
-
-vim.filetype.add({ extension = { templ = "templ" } })
