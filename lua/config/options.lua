@@ -8,3 +8,5 @@ vim.filetype.add({
     view = "php",
   },
 })
+
+vim.opt.inccommand = ""
